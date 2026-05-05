@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#08090c">
+    <title>Candid Cards — Conversations That Matter</title>
+    <meta name="description" content="Meaningful conversation cards for couples. Deepen your connection through thoughtful questions.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Home Screen -->
+        <main id="home-screen" class="screen active">
+            <div class="home-header">
+                <div class="header-row">
+                    <div></div>
+                    <div class="brand-center">
+                        <h1 class="brand">Candid Cards</h1>
+                        <p class="brand-sub">Conversations that matter</p>
+                    </div>
+                    <button class="btn-sound" id="btn-sound" title="Toggle sound">🔊</button>
+                </div>
+            </div>
+
+            <!-- Daily Question -->
+            <div class="daily-banner" id="daily-banner">
+                <div class="daily-label"><span class="pulse"></span> Today's Free Question</div>
+                <p class="daily-question" id="daily-question-text">Loading...</p>
+                <p class="daily-tap">Tap to see follow-up prompts →</p>
+            </div>
+
+            <!-- Free Pack -->
+            <div class="section-header">
+                <span class="section-title">Start Here</span>
+                <span class="section-count">Free</span>
+            </div>
+            <div class="packs-grid" id="free-packs"></div>
+
+            <!-- Premium Packs -->
+            <div class="section-header">
+                <span class="section-title">Go Deeper</span>
+                <span class="section-count" id="premium-count"></span>
+            </div>
+            <div class="packs-grid" id="premium-packs"></div>
+
+            <!-- Bundles -->
+            <div class="section-header">
+                <span class="section-title">Bundles</span>
+                <span class="section-count">Save more</span>
+            </div>
+            <div class="packs-grid" id="bundles"></div>
+
+            <!-- Bottom Nav -->
+            <div class="nav-bottom">
+                <button class="nav-btn" id="btn-favorites">❤️ Saved Questions</button>
+            </div>
+        </main>
+
+        <!-- Play Screen -->
+        <main id="play-screen" class="screen">
+            <header class="play-header">
+                <button class="btn-back" id="btn-back">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <h2 class="play-title" id="play-title">Pack Name</h2>
+                <div class="play-progress" id="play-progress">1 / 20</div>
+            </header>
+
+            <div class="card-area" id="card-area">
+                <div class="card-wrapper">
+                    <div class="question-card placeholder" id="question-card">
+                        <div class="card-emoji" id="card-emoji">💬</div>
+                        <p class="card-question" id="card-question">Tap 'Start' to draw your first card</p>
+                        <div class="card-followups" id="card-followups"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="play-controls">
+                <button class="btn-save" id="btn-save" title="Save this question">🤍</button>
+                <button class="btn-next" id="btn-next">Start Session</button>
+            </div>
+        </main>
+
+        <!-- Favorites Screen -->
+        <main id="favorites-screen" class="screen">
+            <div class="fav-header">
+                <button class="btn-back" id="btn-fav-back">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <h2 class="fav-title">Saved Questions</h2>
+            </div>
+            <div id="fav-list"></div>
+        </main>
+
+        <!-- Purchase Modal -->
+        <div class="overlay" id="purchase-overlay">
+            <div class="modal" id="purchase-modal">
+                <div class="modal-icon" id="modal-icon">🔒</div>
+                <h3 class="modal-title" id="modal-title">Unlock Pack</h3>
+                <p class="modal-desc" id="modal-desc">Go deeper with thoughtful questions.</p>
+                <div class="preview-questions" id="modal-preview"></div>
+                <button class="btn-buy" id="btn-buy">Unlock for $2.99</button>
+                <button class="btn-restore" id="btn-restore">Restore Purchases</button>
+                <br>
+                <button class="btn-close-modal" id="btn-close-purchase">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Session End Modal -->
+        <div class="overlay" id="end-overlay">
+            <div class="modal" id="end-modal">
+                <div class="end-emoji">✨</div>
+                <h3 class="end-title">Great Conversation!</h3>
+                <p class="end-desc" id="end-desc">You've completed this pack. How was it?</p>
+                <div class="end-stats">
+                    <div class="stat"><div class="stat-num" id="stat-cards">0</div><div class="stat-label">Cards</div></div>
+                    <div class="stat"><div class="stat-num" id="stat-saved">0</div><div class="stat-label">Saved</div></div>
+                </div>
+                <button class="reward-btn" id="btn-reward">🎬 Watch ad for 4 bonus cards</button>
+                <button class="btn-end-primary" id="btn-unlock-more">Unlock More Packs</button>
+                <button class="btn-end-secondary" id="btn-end-home">Back to Home</button>
+            </div>
+        </div>
+
+        <!-- Daily Question Modal -->
+        <div class="overlay" id="daily-overlay">
+            <div class="modal" id="daily-modal">
+                <div class="modal-icon">🌅</div>
+                <h3 class="modal-title">Today's Question</h3>
+                <p class="card-question" id="daily-modal-question" style="font-size:1.15rem; margin: 1rem 0;"></p>
+                <div id="daily-modal-followups" style="text-align:left; margin-bottom:1.5rem;"></div>
+                <button class="btn-end-secondary" id="btn-close-daily">Close</button>
+            </div>
+        </div>
+
+        <!-- Toast -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

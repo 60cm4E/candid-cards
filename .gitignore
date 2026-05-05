@@ -1,0 +1,25 @@
+# Node
+node_modules/
+
+# Android build outputs
+android/app/build/
+android/.gradle/
+android/build/
+
+# Local properties (machine-specific SDK path)
+android/local.properties
+
+# iOS
+ios/App/Pods/
+ios/.xcode.env.local
+
+# Keystore (보안상 별도 전달)
+*.keystore
+*.jks
+
+# Capacitor
+.capacitor/
+
+# OS
+.DS_Store
+Thumbs.db
